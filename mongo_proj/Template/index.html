@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do Form</title>
+</head>
+<body>
+
+    <h2>Create To-Do Item</h2>
+
+    {% if error %}
+        <p style="color:red;">
+            {{ error }}
+        </p>
+    {% endif %}
+
+    <form action="/submit" method="POST">
+
+        <label>Item Name</label><br>
+        <input
+            type="text"
+            name="item_name"
+            required
+        >
+        <br><br>
+
+        <label>Item Description</label><br>
+        <textarea
+            name="item_description"
+            required
+        ></textarea>
+
+        <br><br>
+
+        <button type="submit">
+            Submit
+        </button>
+
+    </form>
+
+</body>
+</html>
