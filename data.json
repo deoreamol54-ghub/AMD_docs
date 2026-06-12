@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Learn Flask",
+        "description": "Create a REST API"
+    },
+    {
+        "id": 2,
+        "name": "Learn Git",
+        "description": "Practice branching and merging"
+    }
+]
