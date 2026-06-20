@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 app.post("/submit", async (req, res) => {
     try {
         const response = await axios.post(
-            "http://backend:5000/process",
+            "http://13.233.129.233:5000/process",
             req.body
         );
 
