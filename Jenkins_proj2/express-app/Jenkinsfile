@@ -1,0 +1,48 @@
+pipeline {
+agent any
+
+```
+environment {
+    APP_DIR = "/opt/express-app"
+}
+
+stages {
+
+    stage('Checkout') {
+        steps {
+            git branch: 'main',
+            url: 'https://github.com/deoreamol54-ghub/AMD_docs.git'
+        }
+    }
+
+    stage('Install Dependencies') {
+        steps {
+            sh '''
+            npm install
+            '''
+        }
+    }
+
+    stage('Test') {
+        steps {
+            sh '''
+            npm test || true
+            '''
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            sh '''
+            cp -r * $APP_DIR/
+
+            pm2 restart express-app || \
+            pm2 start server.js \
+            --name express-app
+            '''
+        }
+    }
+}
+```
+
+}

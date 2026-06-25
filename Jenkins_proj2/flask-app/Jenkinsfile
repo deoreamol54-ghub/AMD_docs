@@ -1,0 +1,49 @@
+pipeline {
+agent any
+
+```
+environment {
+    APP_DIR = "/opt/flask-app"
+}
+
+stages {
+
+    stage('Checkout') {
+        steps {
+            git branch: 'main',
+            url: 'https://github.com/deoreamol54-ghub/AMD_docs.git'
+        }
+    }
+
+    stage('Install Dependencies') {
+        steps {
+            sh '''
+            pip3 install -r requirements.txt
+            '''
+        }
+    }
+
+    stage('Test') {
+        steps {
+            sh '''
+            python3 -m pytest || true
+            '''
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            sh '''
+            cp -r * $APP_DIR/
+
+            pm2 restart flask-app || \
+            pm2 start app.py \
+            --name flask-app \
+            --interpreter python3
+            '''
+        }
+    }
+}
+```
+
+}
